@@ -16,6 +16,7 @@
         </property>
         <property name="content" type="text">
             <description>Content of the article</description>
+            <contenttype>html</contenttype>
         </property>
         <property name="url" type="string">
             <description>URL for articles imported from remote sources</description>
