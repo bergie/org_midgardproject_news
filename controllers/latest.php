@@ -43,17 +43,11 @@ class org_midgardproject_news_controllers_latest
     {
         $qb = new midgard_query_builder('org_midgardproject_news_article');
         $this->check_categories($qb, $args);
-
-        if (isset($args['type']))
-        {
-            // TODO: Check for valid types
-            $qb->add_constraint('type', '=', $args['type']);
-        }
-
+        $this->check_types($qb, $args);
         $qb->add_order('metadata.published', 'DESC');
         $qb->set_limit(midgardmvc_core::get_instance()->configuration->index_items);
-
         $items = $qb->execute();
+
         $this->data['items'] = array();
         foreach ($items as $item)
         {
