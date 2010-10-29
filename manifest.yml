@@ -45,3 +45,9 @@ routes:
         action: update
         template_aliases: 
             content: omn-show-form
+    item_delete:
+        path: /delete/{$item}
+        controller: org_midgardproject_news_controllers_item
+        action: delete
+        template_aliases: 
+            content: omn-show-delete
