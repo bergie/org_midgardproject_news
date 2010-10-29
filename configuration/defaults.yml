@@ -1,0 +1,8 @@
+categories:
+    - foo
+types:
+    - news
+    - blog
+    - commit
+    - ticket
+index_items: 10

@@ -1,0 +1,32 @@
+version: 0.0.1
+routes:
+    index:
+        path: /
+        controller: org_midgardproject_news_controllers_latest
+        action: items
+        template_aliases: 
+            content: omn-show-latest
+    category:
+        path: /category/{$category}
+        controller: org_midgardproject_news_controllers_latest
+        action: items
+        template_aliases: 
+            content: omn-show-latest
+    category_type:
+        path: /category/{$category}/{$type}
+        controller: org_midgardproject_news_controllers_latest
+        action: items
+        template_aliases: 
+            content: omn-show-latest
+    type:
+        path: /type/{$type}
+        controller: org_midgardproject_news_controllers_latest
+        action: items
+        template_aliases: 
+            content: omn-show-latest
+    item:
+        path: /{$item}
+        controller: org_midgardproject_news_controllers_crud
+        action: read
+        template_aliases: 
+            content: omn-show-item

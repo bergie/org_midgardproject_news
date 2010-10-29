@@ -1,0 +1,10 @@
+<h1 tal:content="org_midgardproject_news/title">Latest news</h1>
+
+<ol class="hfeed" tal:condition="org_midgardproject_news/items">
+    <li tal:repeat="item org_midgardproject_news/items">
+        <article>
+            <h1 tal:content="item/title">Blog post</h1>
+            <div tal:content="structure item/content">Lorem ipsum</div>
+        </article>
+    </li>
+</ol>
