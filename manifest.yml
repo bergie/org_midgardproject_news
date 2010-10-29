@@ -1,4 +1,6 @@
 version: 0.0.1
+requires:
+    midgardmvc_helper_forms: foo
 routes:
     index:
         path: /
@@ -24,9 +26,21 @@ routes:
         action: items
         template_aliases: 
             content: omn-show-latest
-    item:
-        path: /{$item}
-        controller: org_midgardproject_news_controllers_crud
+    item_create:
+        path: /create/
+        controller: org_midgardproject_news_controllers_item
+        action: create
+        template_aliases: 
+            content: omn-show-form
+    item_read:
+        path: /read/{$item}
+        controller: org_midgardproject_news_controllers_item
         action: read
         template_aliases: 
             content: omn-show-item
+    item_update:
+        path: /update/{$item}
+        controller: org_midgardproject_news_controllers_item
+        action: update
+        template_aliases: 
+            content: omn-show-form

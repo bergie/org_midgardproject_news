@@ -52,7 +52,19 @@ class org_midgardproject_news_controllers_latest
 
         $qb->add_order('metadata.published', 'DESC');
         $qb->set_limit(midgardmvc_core::get_instance()->configuration->index_items);
-        $this->data['items'] = $qb->execute();
+
+        $items = $qb->execute();
+        $this->data['items'] = array();
+        foreach ($items as $item)
+        {
+            if (!$item->url)
+            {
+                // Local news item, generate link
+                $item->url = midgardmvc_core::get_instance()->dispatcher->generate_url('item_read', array('item' => $item->guid), $this->request);
+            }
+            $this->data['items'][] = $item;
+        }
+
         $this->data['title'] = 'Latest news';
     }
 }
