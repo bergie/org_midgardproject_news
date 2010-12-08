@@ -38,7 +38,27 @@ class org_midgardproject_news_controllers_item extends midgardmvc_core_controlle
     public function load_form()
     {
         $this->form = midgardmvc_helper_forms_mgdschema::create($this->object);
-        // TODO: Change category and type to selectors here
+
+        // Make Category and Type proper selects instead
+        unset($this->form->category);
+        unset($this->form->type);
+
+        $field = $this->form->add_field('category', 'text');
+        $field->set_value($this->object->category);
+        $widget = $field->set_widget('selectoption');
+        $widget->set_label('category');
+        $category_options = array();
+        $categories = midgardmvc_core::get_instance()->configuration->categories;
+        foreach ($categories as $category)
+        {
+            $category_options[] = array
+            (
+                'description' => ucfirst($category),
+                'value' => $category,
+            );
+        }
+
+        $widget->set_options($category_options);
     }
 }
 ?>
