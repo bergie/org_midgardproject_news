@@ -1,7 +1,7 @@
 version: 0.0.1
 requires:
     midgardmvc_helper_forms:
-        git: git://github.com/midgardproject/midgardmvc_helper_forms.git
+        - {type: github, user: midgardproject, repository: midgardmvc_helper_forms, branch: master}
 routes:
     index:
         path: /
