@@ -31,7 +31,7 @@ class org_midgardproject_news_controllers_latest
         if (isset($args['type']))
         {
             // Check that the user-provided type is valid
-            if (!in_array($args['typey'], $types))
+            if (!in_array($args['type'], $types))
             {
                 throw new midgardmvc_exception_notfound("Type {$args['type']} not found");
             }
@@ -44,7 +44,7 @@ class org_midgardproject_news_controllers_latest
         $qb = new midgard_query_builder('org_midgardproject_news_article');
         $this->check_categories($qb, $args);
         $this->check_types($qb, $args);
-        $qb->add_order('metadata.published', 'DESC');
+        $qb->add_order('metadata.created', 'DESC');
         $qb->set_limit(midgardmvc_core::get_instance()->configuration->index_items);
         $items = $qb->execute();
 
