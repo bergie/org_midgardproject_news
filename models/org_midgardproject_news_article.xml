@@ -2,12 +2,17 @@
 <!-- This is the Midgard2 schema for articles -->
 <Schema xmlns="http://www.midgard-project.org/repligard/1.4">
     <type name="org_midgardproject_news_article" table="org_midgardproject_news_article">
+        <user_values>
+            <typeof>http://rdfs.org/sioc/ns#Post</typeof>
+            <namespaces>sioc:http://rdfs.org/sioc/ns#,dcterms:http://purl.org/dc/terms/</namespaces>
+        </user_values>
         <property name="id" type="unsigned integer" primaryfield="id">
             <description>Local non-replication-safe database identifier</description>
         </property>
         <property name="title" type="string">
             <description>Title of the article</description>
             <required>true</required>
+            <property>dcterms:title</property>
         </property>
         <property name="category" type="string" index="yes">
             <description>Article category</description>
@@ -19,6 +24,7 @@
         <property name="content" type="text">
             <description>Content of the article</description>
             <contenttype>html</contenttype>
+            <property>sioc:content</property>
         </property>
         <property name="url" type="string">
             <description>URL for articles imported from remote sources</description>
