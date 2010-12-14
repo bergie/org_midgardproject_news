@@ -1,4 +1,4 @@
-<article>
-    <h1 tal:content="org_midgardproject_news/object/title">Blog post</h1>
-    <div tal:content="structure org_midgardproject_news/object/content">Lorem ipsum</div>
+<article xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:dcterms="http://purl.org/dc/terms/" typeof="http://rdfs.org/sioc/ns#Post" tal:attributes="about string:urn:uuid:${org_midgardproject_news/object/guid}">
+    <h1 tal:content="org_midgardproject_news/object/title" property="dcterms:title">Blog post</h1>
+    <div tal:content="structure org_midgardproject_news/object/content" property="sioc:content">Lorem ipsum</div>
 </article>
