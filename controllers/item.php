@@ -37,7 +37,7 @@ class org_midgardproject_news_controllers_item extends midgardmvc_core_controlle
 
     public function load_form()
     {
-        $this->form = midgardmvc_helper_forms_mgdschema::create($this->object);
+        $this->form = midgardmvc_helper_forms_mgdschema::create($this->object, false);
 
         // Make Category and Type proper selects instead
         unset($this->form->category);
