@@ -15,8 +15,13 @@ class org_midgardproject_news_injector
 {
     public function inject_process(midgardmvc_core_request $request)
     {
-        // Subscribe to content changed signals from Midgard
-        midgard_object_class::connect_default('org_midgardproject_news_article', 'action-create', array('org_midgardproject_news_injector', 'check'), array($request));
+        static $connected = false;
+
+        if (!$connected)
+        {
+            // Subscribe to content changed signals from Midgard
+            midgard_object_class::connect_default('org_midgardproject_news_article', 'action-create', array('org_midgardproject_news_injector', 'check'), array($request));
+        }
     }
 
     public static function check(org_midgardproject_news_article $article, $params)

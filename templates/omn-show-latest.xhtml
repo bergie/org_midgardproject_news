@@ -1,6 +1,6 @@
 <h1 tal:content="org_midgardproject_news/title">Latest news</h1>
 
-<ol mgd:type="container" mgd:order="desc" tal:condition="org_midgardproject_news/items" tal:attributes="mgd:baseurl request/uri" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:dcterms="http://purl.org/dc/terms/" class="news">
+<ol mgd:type="container" mgd:order="desc" tal:condition="org_midgardproject_news/items" tal:attributes="mgd:baseurl request/uri" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:mgd="http://www.midgard-project.org/midgard2/9.03" class="news">
     <li tal:repeat="item org_midgardproject_news/items">
         <article typeof="http://rdfs.org/sioc/ns#Post" tal:attributes="about string:urn:uuid:${item/guid}">
             <h1>
