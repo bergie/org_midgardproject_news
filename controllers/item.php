@@ -4,6 +4,8 @@ class org_midgardproject_news_controllers_item extends midgardmvc_core_controlle
     public function load_object(array $args)
     {
         $this->object = new org_midgardproject_news_article($args['item']);
+
+        midgardmvc_core::get_instance()->head->set_title($this->object->title);
     }
     
     public function prepare_new_object(array $args)

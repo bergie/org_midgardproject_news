@@ -70,5 +70,6 @@ class org_midgardproject_news_controllers_latest
         }
 
         $this->data['title'] = 'Latest news';
+        midgardmvc_core::get_instance()->head->set_title($this->data['title']);
     }
 }
