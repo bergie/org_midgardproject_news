@@ -59,6 +59,15 @@ class org_midgardproject_news_controllers_latest
             $this->data['items'][] = $item;
         }
 
+        if (   empty($this->data['items'])
+            && midgardmvc_ui_create_injector::can_use())
+        {
+            $dummy = new org_midgardproject_news_article();
+            $dummy->title = 'title';
+            $dummy->content = 'content';
+            $this->data['items'][] = $dummy;
+        }
+
         $this->data['title'] = 'Latest news';
     }
 }
