@@ -26,7 +26,8 @@ class org_midgardproject_news_injector
 
     public static function check(org_midgardproject_news_article $article, $params)
     {
-        if (!$article->category)
+        if (   !$article->category
+            && isset(midgardmvc_core::get_instance()->configuration->categories))
         {
             $categories = midgardmvc_core::get_instance()->configuration->categories;
             $article->category = $categories[0];

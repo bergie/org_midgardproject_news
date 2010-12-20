@@ -60,11 +60,12 @@ class org_midgardproject_news_controllers_latest
         }
 
         if (   empty($this->data['items'])
+            && midgardmvc_core::get_instance()->component->is_installed('midgardmvc_ui_create')
             && midgardmvc_ui_create_injector::can_use())
         {
             $dummy = new org_midgardproject_news_article();
-            $dummy->title = 'title';
-            $dummy->content = 'content';
+            $dummy->title = '<dcterms:title>';
+            $dummy->content = '<sioc:content>';
             $this->data['items'][] = $dummy;
         }
 
