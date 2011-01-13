@@ -2,6 +2,8 @@ version: 0.0.1
 requires:
     midgardmvc_helper_forms:
         - {type: github, user: midgardproject, repository: midgardmvc_helper_forms, branch: master}
+    midgardmvc_ui_create:
+        - {type: github, user: bergie, repository: midgardmvc_ui_create, branch: master}
 process_injector: org_midgardproject_news_injector
 routes:
     index:

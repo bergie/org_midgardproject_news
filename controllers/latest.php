@@ -48,7 +48,7 @@ class org_midgardproject_news_controllers_latest
         $qb->set_limit(midgardmvc_core::get_instance()->configuration->index_items);
         $items = $qb->execute();
 
-        $this->data['items'] = array();
+        $this->data['items'] = new midgardmvc_ui_create_container();
         foreach ($items as $item)
         {
             if (!$item->url)
@@ -56,18 +56,11 @@ class org_midgardproject_news_controllers_latest
                 // Local news item, generate link
                 $item->url = midgardmvc_core::get_instance()->dispatcher->generate_url('item_read', array('item' => $item->guid), $this->request);
             }
-            $this->data['items'][] = $item;
+            $this->data['items']->attach($item);
         }
 
-        if (   empty($this->data['items'])
-            && midgardmvc_core::get_instance()->component->is_installed('midgardmvc_ui_create')
-            && midgardmvc_ui_create_injector::can_use())
-        {
-            $dummy = new org_midgardproject_news_article();
-            $dummy->title = '<dcterms:title>';
-            $dummy->content = '<sioc:content>';
-            $this->data['items'][] = $dummy;
-        }
+        $dummy = new org_midgardproject_news_article();
+        $this->data['items']->set_placeholder($dummy);
 
         $this->data['title'] = 'Latest news';
         midgardmvc_core::get_instance()->head->set_title($this->data['title']);
