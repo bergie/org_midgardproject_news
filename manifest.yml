@@ -4,6 +4,9 @@ requires:
         - {type: github, user: midgardproject, repository: midgardmvc_helper_forms, branch: master}
     midgardmvc_ui_create:
         - {type: github, user: bergie, repository: midgardmvc_ui_create, branch: master}
+requires_pear:
+    Feed:
+        channel: components.ez.no
 process_injector: org_midgardproject_news_injector
 routes:
     index:

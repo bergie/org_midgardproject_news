@@ -6,3 +6,5 @@ types:
     - commit
     - ticket
 index_items: 10
+fetch_feeds:
+    -
