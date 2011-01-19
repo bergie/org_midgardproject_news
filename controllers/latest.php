@@ -44,6 +44,7 @@ class org_midgardproject_news_controllers_latest
         $qb = new midgard_query_builder('org_midgardproject_news_article');
         $this->check_categories($qb, $args);
         $this->check_types($qb, $args);
+        $qb->add_order('metadata.published', 'DESC');
         $qb->add_order('metadata.created', 'DESC');
         $qb->set_limit(midgardmvc_core::get_instance()->configuration->index_items);
         $items = $qb->execute();

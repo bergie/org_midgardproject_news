@@ -21,16 +21,25 @@ class org_midgardproject_news_injector
         {
             // Subscribe to content changed signals from Midgard
             midgard_object_class::connect_default('org_midgardproject_news_article', 'action-create', array('org_midgardproject_news_injector', 'check'), array($request));
+            $connected = true;
         }
     }
 
     public static function check(org_midgardproject_news_article $article, $params)
     {
+        /*if ($article->metadata->published->getTimestamp() == 0)
+        {
+            $article->metadata->published->setTimestamp(0);
+        }*/
+
         if (   !$article->category
             && isset(midgardmvc_core::get_instance()->configuration->categories))
         {
             $categories = midgardmvc_core::get_instance()->configuration->categories;
-            $article->category = $categories[0];
+            if (!empty($categories))
+            {
+                $article->category = $categories[0];
+            }
         }
     }
 }
