@@ -27,10 +27,11 @@ class org_midgardproject_news_injector
 
     public static function check(org_midgardproject_news_article $article, $params)
     {
-        /*if ($article->metadata->published->getTimestamp() == 0)
+        if ($article->metadata->published->getTimestamp() == 0)
         {
-            $article->metadata->published->setTimestamp(0);
-        }*/
+            echo "Setting {$article->title} to time()\n";
+            $article->metadata->published->setTimestamp(time());
+        }
 
         if (   !$article->category
             && isset(midgardmvc_core::get_instance()->configuration->categories))

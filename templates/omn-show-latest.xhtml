@@ -4,7 +4,7 @@
     <li tal:repeat="item org_midgardproject_news/items">
         <article tal:attributes="about item/rdfmapper/about; typeof item/rdfmapper/typeof">
             <h1>
-                <span tal:content="php: item.metadata.created.format('Y-m-d')">1999-05-07</span>
+                <span tal:content="php: item.metadata.published.format('Y-m-d')">1999-05-07</span>
                 <a tal:content="item/title" tal:attributes="href item/url; property item/rdfmapper/title">Blog post</a>
             </h1>
             <div tal:content="structure item/content" tal:attributes="property item/rdfmapper/content">Lorem ipsum</div>

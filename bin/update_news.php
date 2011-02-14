@@ -10,6 +10,54 @@ require("{$basedir}/midgardmvc_core/framework.php");
 $mvc = midgardmvc_core::get_instance("{$basedir}/application.yml");
 midgardmvc_core::get_instance()->component->load_library('Feed');
 
+function import_item($item)
+{
+    $link = $item->link[0]->href;
+    $update = false;
+    $qb = new midgard_query_builder('org_midgardproject_news_article');
+    $qb->add_constraint('url', '=', $link);
+    $articles = $qb->execute();
+    if (empty($articles))
+    {
+        // New news item
+        $article = new org_midgardproject_news_article();
+        $article->url = $link;
+        $update = true;
+    }
+    else
+    {
+        $article = $articles[0];
+    }
+
+    if ($article->title != $item->title->text)
+    {
+        $article->title = $item->title->text;
+        $update = true;
+    }
+
+    if ($article->content != $item->description->text)
+    {
+        $article->content = $item->description->text;
+        $update = true;
+    }
+
+    if ($article->metadata->published->getTimestamp() != $item->published->date->getTimestamp())
+    {
+        $article->metadata->published->setTimestamp($item->published->date->getTimestamp());
+        $update = true;
+    }
+
+    if ($update)
+    {
+        if (!$article->guid)
+        {
+            $article->create();
+            return;
+        }
+        $article->update();
+    }
+}
+
 function fetch_node_feeds(midgardmvc_core_providers_hierarchy_node $node)
 {
     // Initialize context
@@ -40,53 +88,13 @@ function fetch_node_feeds(midgardmvc_core_providers_hierarchy_node $node)
             continue;
         }
 
+        $transaction = new midgard_transaction();
+        $transaction->begin();
         foreach ($feed->item as $item)
         {
-            $link = $item->link[0]->href;
-            $update = false;
-            $qb = new midgard_query_builder('org_midgardproject_news_article');
-            $qb->add_constraint('url', '=', $link);
-            $articles = $qb->execute();
-            if (empty($articles))
-            {
-                // New news item
-                $article = new org_midgardproject_news_article();
-                $article->url = $link;
-                $update = true;
-            }
-            else
-            {
-                $article = $articles[0];
-            }
-
-            if ($article->title != $item->title->text)
-            {
-                $article->title = $item->title->text;
-                $update = true;
-            }
-
-            if ($article->content != $item->description->text)
-            {
-                $article->content = $item->description->text;
-                $update = true;
-            }
-
-            /*if ($article->metadata->published->getTimestamp() != $item->published->date->getTimestamp())
-            {
-                $article->metadata->published = $item->published->date;
-                $update = true;
-            }*/
-
-            if ($update)
-            {
-                if (!$article->guid)
-                {
-                    $article->create();
-                    continue;
-                }
-                $article->update();
-            }
+            import_item($item);
         }
+        $transaction->commit();
     }
 
     midgardmvc_core::get_instance()->context->delete();
