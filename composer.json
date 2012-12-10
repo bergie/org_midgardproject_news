@@ -1,5 +1,5 @@
 {
-  "name": "midgard/org_midgardproject_news",
+  "name": "midgard/org-midgardproject-news",
   "type": "library",
   "description": "News listing component for Midgard MVC",
   "keywords": ["news", "feed"],
