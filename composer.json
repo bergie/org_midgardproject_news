@@ -1,0 +1,28 @@
+{
+  "name": "midgard/org_midgardproject_news",
+  "type": "library",
+  "description": "News listing component for Midgard MVC",
+  "keywords": ["news", "feed"],
+  "license": "LGPL",
+  "authors": [
+    {
+      "name": "Henri Bergius",
+      "email": "henri.bergius@iki.fi",
+      "homepage": "http://bergie.iki.fi/"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.2.0"
+  },
+  "require": {
+    "zetacomponents/feed": "dev-master",
+    "midgard/midgardmvc-helper-forms": "dev-master",
+    "midgard/midgardmvc-ui-create": "dev-legacy",
+    "midgard/midgardmvc-core": "dev-master",
+    "symfony/symfony": "dev-master"
+  },
+  "autoload": {
+    "classmap": ["."]
+  }
+}
