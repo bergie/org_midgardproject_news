@@ -1,13 +1,26 @@
+#!/usr/bin/env php
 <?php
-$filepath = ini_get ("midgard.configuration_file");
-$config = new midgard_config ();
+$filepath = get_cfg_var("midgard.configuration_file");
+if (!$filepath) {
+    die("PHP ini variable midgard.configuration_file not set.\n");
+}
+$config = new midgard_config();
 $config->read_file_at_path($filepath);
-$mgd = midgard_connection::get_instance();
-$mgd->open_config($config); 
 
-$basedir = dirname(__FILE__) . '/../..';
-require("{$basedir}/midgardmvc_core/framework.php");
-$mvc = midgardmvc_core::get_instance("{$basedir}/application.yml");
+$mgd = midgard_connection::get_instance();
+if (!$mgd->open_config($config)) {
+    die("Failed to open database connection with {$filepath}\n");
+}
+
+require __DIR__ . '/../../midgardmvc-core/framework.php';
+
+$application_config = get_cfg_var('midgardmvc.application_config');
+if (!$application_config)
+{
+    die("PHP ini variable midgardmvc.application_config not set.\n");
+}
+$mvc = midgardmvc_core::get_instance($application_config);
+
 midgardmvc_core::get_instance()->component->load_library('Feed');
 
 function import_item($item)

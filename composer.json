@@ -24,5 +24,6 @@
   },
   "autoload": {
     "classmap": ["."]
-  }
+  },
+  "bin": ["bin/omn_update_news"]
 }
