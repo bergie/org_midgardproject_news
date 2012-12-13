@@ -3,7 +3,7 @@ requires:
     midgardmvc_helper_forms:
         - {type: github, user: midgardproject, repository: midgardmvc_helper_forms, branch: master}
     midgardmvc_ui_create:
-        - {type: github, user: bergie, repository: midgardmvc_ui_create, branch: master}
+        - {type: github, user: bergie, repository: midgardmvc_ui_create, branch: legacy}
 requires_pear:
     Feed:
         channel: components.ez.no
